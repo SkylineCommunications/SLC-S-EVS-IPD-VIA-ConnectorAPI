@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Model
+﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Model
 {
-    /// <summary>
-    /// Represents a recording session in the EVS IPD-VIA model.
-    /// </summary>
-    public class RecordingSession
+	using System;
+	using System.Collections.Generic;
+
+	/// <summary>
+	/// Represents a recording session in the EVS IPD-VIA model.
+	/// </summary>
+	public class RecordingSession
     {
         /// <summary>
         /// Gets or sets the ID of the recording session.
@@ -32,6 +32,11 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Model
         /// Gets or sets the recorder associated with the recording session.
         /// </summary>
         public string Recorder { get; set; }
+
+        /// <summary>
+        /// Gets or sets the status of the recording session.
+        /// </summary>
+        public RecordingStatus Status { get; set; }
 
         /// <summary>
         /// Gets or sets the list of targets associated with the recording session.

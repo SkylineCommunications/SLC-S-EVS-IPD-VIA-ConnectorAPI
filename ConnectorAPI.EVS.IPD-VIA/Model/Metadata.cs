@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Model
+﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Model
 {
-    /// <summary>
-    /// Represents metadata in the EVS IPD-VIA model.
-    /// </summary>
-    public class Metadata
+	using System.Collections.Generic;
+
+	/// <summary>
+	/// Represents metadata in the EVS IPD-VIA model.
+	/// </summary>
+	public class Metadata
     {
         /// <summary>
         /// Gets or sets the profile associated with the metadata.
