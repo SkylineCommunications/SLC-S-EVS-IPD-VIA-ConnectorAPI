@@ -36,7 +36,7 @@
         /// <summary>
         /// Gets or sets the status of the recording session.
         /// </summary>
-        public RecordingStatus Status { get; set; }
+        public RecordingSessionStatus Status { get; set; }
 
         /// <summary>
         /// Gets or sets the list of targets associated with the recording session.
