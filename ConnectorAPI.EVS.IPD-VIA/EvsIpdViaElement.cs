@@ -80,7 +80,7 @@
 				if (timeout != null) return (TimeSpan)timeout;
 				try
 				{
-					var timeoutInSeconds = element.GetStandaloneParameter<double?>(EvsIpdViaProtocol.Parameter.interapptimeout_500) ?? throw new InvalidOperationException("InterApp Timeout value is null.");
+					var timeoutInSeconds = element.GetStandaloneParameter<double?>(EvsIpdViaProtocol.InterAppTimeout) ?? throw new InvalidOperationException("InterApp Timeout value is null.");
 					timeout = TimeSpan.FromSeconds(timeoutInSeconds.GetValue().Value);
 					Log($"Timeout timespan: {timeout}");
 					return (TimeSpan)timeout;
@@ -158,17 +158,17 @@
 		{
 			if (String.IsNullOrWhiteSpace(recordingSessionId)) throw new ArgumentException(nameof(recordingSessionId));
 
-			var recordingSessionsTable = element.GetTable(EvsIpdViaProtocol.Parameter.Recordingsessions.tablePid);
+			var recordingSessionsTable = element.GetTable(EvsIpdViaProtocol.RecordingSessionsTable.TablePid);
 			var row = recordingSessionsTable.GetRow(recordingSessionId);
 
 			var recordingSession = new RecordingSession
 			{
-				Id = Convert.ToString(row[EvsIpdViaProtocol.Parameter.Recordingsessions.Idx.recordingsessionsinstance_1401]),
-				Name = Convert.ToString(row[EvsIpdViaProtocol.Parameter.Recordingsessions.Idx.recordingsessionsname_1402]),
-				Start = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.Parameter.Recordingsessions.Idx.recordingsessionsdatein])), DateTimeKind.Local),
-				End = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.Parameter.Recordingsessions.Idx.recordingsessionsdateout])), DateTimeKind.Local),
-				Recorder = Convert.ToString(row[EvsIpdViaProtocol.Parameter.Recordingsessions.Idx.recordingsessionsrecordername]),
-				Status = (RecordingStatus)(Convert.ToInt32(row[EvsIpdViaProtocol.Parameter.Recordingsessions.Idx.recordingsessionsstatus])),
+				Id = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsInstance]),
+				Name = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsName]),
+				Start = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStart])), DateTimeKind.Local),
+				End = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsEnd])), DateTimeKind.Local),
+				Recorder = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsRecorder]),
+				Status = (RecordingStatus)(Convert.ToInt32(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStatus])),
 				Targets = GetTargetsOfRecordingSession(recordingSessionId),
 				Metadata = GetMetadataOfRecordingSession(recordingSessionId).Values.ToList()
 			};
@@ -182,9 +182,9 @@
 		/// <returns>List of available recorders.</returns>
 		public IEnumerable<Recorder> GetRecorders()
 		{
-			var recordersTable = element.GetTable(EvsIpdViaProtocol.Parameter.Recorders.tablePid)?.GetData();
+			var recordersTable = element.GetTable(EvsIpdViaProtocol.RecordersTable.TablePid)?.GetData();
 
-			return recordersTable.Select(x => new Recorder { Id = x.Key, Name = Convert.ToString(x.Value[EvsIpdViaProtocol.Parameter.Recorders.Idx.recordersname]) }).ToList();
+			return recordersTable.Select(x => new Recorder { Id = x.Key, Name = Convert.ToString(x.Value[EvsIpdViaProtocol.RecordersTable.Idx.RecordersName]) }).ToList();
 		}
 
 		/// <summary>
@@ -193,9 +193,9 @@
 		/// <returns>List of target names.</returns>
 		public IEnumerable<string> GetTargetNames()
 		{
-			var targetsTable = element.GetTable(EvsIpdViaProtocol.Parameter.Targets.tablePid).GetData();
+			var targetsTable = element.GetTable(EvsIpdViaProtocol.TargetsTable.TablePid).GetData();
 
-			return targetsTable.Values.Select(x => Convert.ToString(x[EvsIpdViaProtocol.Parameter.Targets.Idx.targetsname])).ToList();
+			return targetsTable.Values.Select(x => Convert.ToString(x[EvsIpdViaProtocol.TargetsTable.Idx.TargetsName])).ToList();
 		}
 
 		/// <summary>
@@ -204,39 +204,39 @@
 		/// <returns>All labels from the Profile Fields table.</returns>
 		public IEnumerable<Label> GetMetadataLabels()
 		{
-			var profileFieldsTable = element.GetTable(EvsIpdViaProtocol.Parameter.Profilefields.tablePid);
+			var profileFieldsTable = element.GetTable(EvsIpdViaProtocol.ProfileFieldsTable.TablePid);
 
 			return profileFieldsTable.GetData().Values.Select(x => new Label
 			{
-				Key = Convert.ToString(x[EvsIpdViaProtocol.Parameter.Profilefields.Idx.profilefieldskey]),
-				Name = Convert.ToString(x[EvsIpdViaProtocol.Parameter.Profilefields.Idx.profilefieldslabel]),
-				Type = Convert.ToString(x[EvsIpdViaProtocol.Parameter.Profilefields.Idx.profilefieldstype]),
-				Required = Convert.ToBoolean(x[EvsIpdViaProtocol.Parameter.Profilefields.Idx.profilefieldsrequired]),
-				ProfileFqn = Convert.ToString(x[EvsIpdViaProtocol.Parameter.Profilefields.Idx.profilefieldsprofilefqn]),
-				ProfileName = Convert.ToString(x[EvsIpdViaProtocol.Parameter.Profilefields.Idx.profilefieldsprofilename])
+				Key = Convert.ToString(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsKey]),
+				Name = Convert.ToString(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsLabel]),
+				Type = Convert.ToString(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsType]),
+				Required = Convert.ToBoolean(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsRequired]),
+				ProfileFqn = Convert.ToString(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsProfileFqn]),
+				ProfileName = Convert.ToString(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsProfileName])
 			}).ToList();
 		}
 
 		private Dictionary<string, Metadata> GetMetadataOfRecordingSession(string recordingSessionId)
 		{
-			var metaDataTable = element.GetTable(EvsIpdViaProtocol.Parameter.Recordingsessionsmetadatavalues.tablePid);
+			var metaDataTable = element.GetTable(EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.TablePid);
 			var metaDataEntries = metaDataTable.QueryData(new[]
 			{
 				new ColumnFilter
 				{
-					Pid = EvsIpdViaProtocol.Parameter.Recordingsessionsmetadatavalues.Pid.recordingsessionsmetadatavaluesrecordingsessionid,
+					Pid = EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.Pid.RecordingSessionsMetadataValuesRecordingSessionId,
 					ComparisonOperator = ComparisonOperator.Equal,
 					Value = recordingSessionId
 				}
 			});
 
-			var profileFieldsTableData = element.GetTable(EvsIpdViaProtocol.Parameter.Profilefields.tablePid).GetData();
+			var profileFieldsTableData = element.GetTable(EvsIpdViaProtocol.ProfileFieldsTable.TablePid).GetData();
 			Dictionary<string, Metadata> metadataToStore = new Dictionary<string, Metadata>();
 			foreach (var metaDataEntry in metaDataEntries)
 			{
-				string profileFqn = Convert.ToString(metaDataEntry[EvsIpdViaProtocol.Parameter.Recordingsessionsmetadatavalues.Idx.recordingsessionsmetadatavaluesprofile]);
-				string label = Convert.ToString(metaDataEntry[EvsIpdViaProtocol.Parameter.Recordingsessionsmetadatavalues.Idx.recordingsessionsmetadatavalueskey]);
-				string value = Convert.ToString(metaDataEntry[EvsIpdViaProtocol.Parameter.Recordingsessionsmetadatavalues.Idx.recordingsessionsmetadatavaluesvalue]);
+				string profileFqn = Convert.ToString(metaDataEntry[EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.Idx.RecordingSessionsMetadataValuesProfile]);
+				string label = Convert.ToString(metaDataEntry[EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.Idx.RecordingSessionsMetadataValuesKey]);
+				string value = Convert.ToString(metaDataEntry[EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.Idx.RecordingSessionsMetadataValuesValue]);
 
 				string key = GetProfileFieldKey(profileFqn, label, profileFieldsTableData.Values);
 				if (String.IsNullOrWhiteSpace(key)) continue;
@@ -263,17 +263,17 @@
 
 		private IEnumerable<string> GetTargetsOfRecordingSession(string recordingSessionId)
 		{
-			var recordingSessionsTargetsTable = element.GetTable(EvsIpdViaProtocol.Parameter.Recordingsessionstargets.tablePid);
+			var recordingSessionsTargetsTable = element.GetTable(EvsIpdViaProtocol.RecordingSessionsTargetsTable.TablePid);
 
 			var targets = recordingSessionsTargetsTable.QueryData(new[]
 			{
 				new ColumnFilter
 				{
-					Pid = EvsIpdViaProtocol.Parameter.Recordingsessionstargets.Pid.recordingsessionstargetsrecordingsessioninstance,
+					Pid = EvsIpdViaProtocol.RecordingSessionsTargetsTable.Pid.RecordingSessionsTargetsInstance,
 					ComparisonOperator = ComparisonOperator.Equal,
 					Value = recordingSessionId
 				}
-			}).Select(x => Convert.ToString(x[EvsIpdViaProtocol.Parameter.Recordingsessionstargets.Idx.recordingsessionstargetstarget])).ToArray();
+			}).Select(x => Convert.ToString(x[EvsIpdViaProtocol.RecordingSessionsTargetsTable.Idx.RecordingSessionsTargetsTarget])).ToArray();
 
 			return targets;
 		}
@@ -333,12 +333,12 @@
 		{
 			foreach (var row in profileFieldsRows)
 			{
-				string rowProfileFqn = Convert.ToString(row[EvsIpdViaProtocol.Parameter.Profilefields.Idx.profilefieldsprofilefqn]);
-				string rowProfileFieldLabel = Convert.ToString(row[EvsIpdViaProtocol.Parameter.Profilefields.Idx.profilefieldslabel]);
+				string rowProfileFqn = Convert.ToString(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsProfileFqn]);
+				string rowProfileFieldLabel = Convert.ToString(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsLabel]);
 
 				if (String.Equals(profileFqn, rowProfileFqn, StringComparison.InvariantCultureIgnoreCase) && String.Equals(profileFieldLabel, rowProfileFieldLabel, StringComparison.InvariantCultureIgnoreCase))
 				{
-					return Convert.ToString(row[EvsIpdViaProtocol.Parameter.Profilefields.Idx.profilefieldskey]);
+					return Convert.ToString(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsKey]);
 				}
 			}
 
