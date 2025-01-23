@@ -164,11 +164,11 @@
 			var recordingSession = new RecordingSession
 			{
 				Id = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsInstance]),
-				Name = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsName]),
-				Start = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStart])), DateTimeKind.Local),
-				End = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsEnd])), DateTimeKind.Local),
-				Recorder = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsRecorder]),
-				Status = (RecordingStatus)(Convert.ToInt32(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStatus])),
+				Name = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsNameIdx]),
+				Start = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStartIdx])), DateTimeKind.Local),
+				End = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsEndIdx])), DateTimeKind.Local),
+				Recorder = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsRecorderIdx]),
+				Status = (RecordingStatus)(Convert.ToInt32(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStatusIdx])),
 				Targets = GetTargetsOfRecordingSession(recordingSessionId),
 				Metadata = GetMetadataOfRecordingSession(recordingSessionId).Values.ToList()
 			};

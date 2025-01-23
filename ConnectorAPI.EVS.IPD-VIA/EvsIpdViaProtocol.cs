@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Defines constants related to the EVS IPD-VIA protocol.
 	/// </summary>
-	public static class EvsIpdViaProtocol
+	internal static class EvsIpdViaProtocol
 	{
 		/// <summary>
 		/// The name of the EVS IPD-VIA protocol.
@@ -104,27 +104,27 @@
 				/// <summary>
 				/// Index for Recording Sessions Name.
 				/// </summary>
-				public static readonly int RecordingSessionsName = 1;
+				public static readonly int RecordingSessionsNameIdx = 1;
 
 				/// <summary>
 				/// Index for Recording Sessions Status.
 				/// </summary>
-				public static readonly int RecordingSessionsStatus = 2;
+				public static readonly int RecordingSessionsStatusIdx = 2;
 
 				/// <summary>
 				/// Index for Recording Sessions Start.
 				/// </summary>
-				public static readonly int RecordingSessionsStart = 3;
+				public static readonly int RecordingSessionsStartIdx = 3;
 
 				/// <summary>
 				/// Index for Recording Sessions End.
 				/// </summary>
-				public static readonly int RecordingSessionsEnd = 4;
+				public static readonly int RecordingSessionsEndIdx = 4;
 
 				/// <summary>
 				/// Index for Recording Sessions Recorder.
 				/// </summary>
-				public static readonly int RecordingSessionsRecorder = 5;
+				public static readonly int RecordingSessionsRecorderIdx = 5;
 			}
 		}
 
