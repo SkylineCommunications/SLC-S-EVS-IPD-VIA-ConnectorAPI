@@ -1,11 +1,11 @@
-﻿using System.ComponentModel;
-
-namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
+﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 {
-    /// <summary>
-    /// Defines constants related to the EVS IPD-VIA protocol.
-    /// </summary>
-    public static class EvsIpdViaProtocol
+	using System.ComponentModel;
+
+	/// <summary>
+	/// Defines constants related to the EVS IPD-VIA protocol.
+	/// </summary>
+	internal static class EvsIpdViaProtocol
     {
         /// <summary>
         /// The name of the EVS IPD-VIA protocol.
@@ -299,13 +299,12 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 			public const int clp_interapp_return_9000001 = 9000001;
 			/// <summary>PID: 9000001 | Type: read</summary>
 			public const int clp_interapp_return = 9000001;
-			public class Write
+			
+			public static class Write
 			{
 				/// <summary>PID: 6 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int debugloggingstate_6 = 6;
-				/// <summary>PID: 6 | Type: write</summary>
-				public const int debugloggingstate = 6;
 				/// <summary>PID: 21 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int refreshrecorders_21 = 21;
@@ -319,53 +318,43 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				/// <summary>PID: 131 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int recordingsessionremovaldelay_131 = 131;
-				/// <summary>PID: 131 | Type: write</summary>
-				public const int recordingsessionremovaldelay = 131;
+
 				/// <summary>PID: 351 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int username_351 = 351;
-				/// <summary>PID: 351 | Type: write</summary>
-				public const int username = 351;
+
 				/// <summary>PID: 352 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int password_352 = 352;
-				/// <summary>PID: 352 | Type: write</summary>
-				public const int password = 352;
+
 				/// <summary>PID: 401 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int rabbitmqusername_401 = 401;
-				/// <summary>PID: 401 | Type: write</summary>
-				public const int rabbitmqusername = 401;
+
 				/// <summary>PID: 403 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int rabbitmqpassword_403 = 403;
-				/// <summary>PID: 403 | Type: write</summary>
-				public const int rabbitmqpassword = 403;
+
 				/// <summary>PID: 405 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int rabbitmqipaddress_405 = 405;
-				/// <summary>PID: 405 | Type: write</summary>
-				public const int rabbitmqipaddress = 405;
+
 				/// <summary>PID: 407 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int rabbitmqport_407 = 407;
-				/// <summary>PID: 407 | Type: write</summary>
-				public const int rabbitmqport = 407;
+
 				/// <summary>PID: 409 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int virtualhost_409 = 409;
-				/// <summary>PID: 409 | Type: write</summary>
-				public const int virtualhost = 409;
+	
 				/// <summary>PID: 416 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int rabbitmqdebuglogging_416 = 416;
-				/// <summary>PID: 416 | Type: write</summary>
-				public const int rabbitmqdebuglogging = 416;
+
 				/// <summary>PID: 550 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int interapptimeout_550 = 550;
-				/// <summary>PID: 550 | Type: write</summary>
-				public const int interapptimeout = 550;
+
 				/// <summary>PID: 1450 | Type: write</summary>
 				[EditorBrowsable(EditorBrowsableState.Never)]
 				public const int refreshrecordingsessions_1450 = 1450;
@@ -382,7 +371,8 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				/// <summary>PID: 2100 | Type: write</summary>
 				public const int targetsconfig_contextmenu = 2100;
 			}
-			public class Recorders
+
+			public static class Recorders
 			{
 				/// <summary>PID: 1000</summary>
 				public const int tablePid = 1000;
@@ -390,7 +380,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				public const int indexColumn = 0;
 				/// <summary>PID: 1001</summary>
 				public const int indexColumnPid = 1001;
-				public class Pid
+				public static class Pid
 				{
 					/// <summary>PID: 1001 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -412,11 +402,8 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int recordersservername_1004 = 1004;
 					/// <summary>PID: 1004 | Type: read</summary>
 					public const int recordersservername = 1004;
-					public class Write
-					{
-					}
 				}
-				public class Idx
+				public static class Idx
 				{
 					/// <summary>IDX: 0 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -440,7 +427,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int recordersservername = 3;
 				}
 			}
-			public class Targets
+			public static class Targets
 			{
 				/// <summary>PID: 1100</summary>
 				public const int tablePid = 1100;
@@ -448,7 +435,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				public const int indexColumn = 0;
 				/// <summary>PID: 1101</summary>
 				public const int indexColumnPid = 1101;
-				public class Pid
+				public static class Pid
 				{
 					/// <summary>PID: 1101 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -470,11 +457,9 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int targetstargetparameters_1104 = 1104;
 					/// <summary>PID: 1104 | Type: read</summary>
 					public const int targetstargetparameters = 1104;
-					public class Write
-					{
-					}
+
 				}
-				public class Idx
+				public static class Idx
 				{
 					/// <summary>IDX: 0 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -498,7 +483,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int targetstargetparameters = 3;
 				}
 			}
-			public class Servers
+			public static class Servers
 			{
 				/// <summary>PID: 1300</summary>
 				public const int tablePid = 1300;
@@ -506,7 +491,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				public const int indexColumn = 0;
 				/// <summary>PID: 1301</summary>
 				public const int indexColumnPid = 1301;
-				public class Pid
+				public static class Pid
 				{
 					/// <summary>PID: 1301 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -523,11 +508,9 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int serversstatus_1303 = 1303;
 					/// <summary>PID: 1303 | Type: read</summary>
 					public const int serversstatus = 1303;
-					public class Write
-					{
-					}
+
 				}
-				public class Idx
+				public static class Idx
 				{
 					/// <summary>IDX: 0 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -554,7 +537,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				public const int indexColumn = 0;
 				/// <summary>PID: 1401</summary>
 				public const int indexColumnPid = 1401;
-				public class Pid
+				public static class Pid
 				{
 					/// <summary>PID: 1401 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -591,7 +574,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int recordingsessionsrecorderid_1409 = 1409;
 					/// <summary>PID: 1409 | Type: read</summary>
 					public const int recordingsessionsrecorderid = 1409;
-					public class Write
+					public static class Write
 					{
 						/// <summary>PID: 1412 | Type: write</summary>
 						[EditorBrowsable(EditorBrowsableState.Never)]
@@ -600,7 +583,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 						public const int recordingsessionsrefresh = 1412;
 					}
 				}
-				public class Idx
+				public static class Idx
 				{
 					/// <summary>IDX: 0 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -639,7 +622,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int recordingsessionsrecorderid = 6;
 				}
 			}
-			public class Recordingsessionstargets
+			public static class Recordingsessionstargets
 			{
 				/// <summary>PID: 1500</summary>
 				public const int tablePid = 1500;
@@ -647,7 +630,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				public const int indexColumn = 0;
 				/// <summary>PID: 1501</summary>
 				public const int indexColumnPid = 1501;
-				public class Pid
+				public static class Pid
 				{
 					/// <summary>PID: 1501 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -679,11 +662,8 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int recordingsessionstargetstarget_1506 = 1506;
 					/// <summary>PID: 1506 | Type: read</summary>
 					public const int recordingsessionstargetstarget = 1506;
-					public class Write
-					{
-					}
 				}
-				public class Idx
+				public static class Idx
 				{
 					/// <summary>IDX: 0 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -717,7 +697,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int recordingsessionstargetstarget = 5;
 				}
 			}
-			public class Recordingsessionsprofiles
+			public static class Recordingsessionsprofiles
 			{
 				/// <summary>PID: 1600</summary>
 				public const int tablePid = 1600;
@@ -725,7 +705,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				public const int indexColumn = 0;
 				/// <summary>PID: 1601</summary>
 				public const int indexColumnPid = 1601;
-				public class Pid
+				public static class Pid
 				{
 					/// <summary>PID: 1601 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -752,11 +732,8 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int recordingsessionsprofilesdisplaykey_1605 = 1605;
 					/// <summary>PID: 1605 | Type: read</summary>
 					public const int recordingsessionsprofilesdisplaykey = 1605;
-					public class Write
-					{
-					}
 				}
-				public class Idx
+				public static class Idx
 				{
 					/// <summary>IDX: 0 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -785,7 +762,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int recordingsessionsprofilesdisplaykey = 4;
 				}
 			}
-			public class Recordingsessionsmetadatavalues
+			public static class Recordingsessionsmetadatavalues
 			{
 				/// <summary>PID: 1700</summary>
 				public const int tablePid = 1700;
@@ -793,7 +770,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				public const int indexColumn = 0;
 				/// <summary>PID: 1701</summary>
 				public const int indexColumnPid = 1701;
-				public class Pid
+				public static class Pid
 				{
 					/// <summary>PID: 1701 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -835,11 +812,9 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int recordingsessionsmetadatavaluesprofileid_1708 = 1708;
 					/// <summary>PID: 1708 | Type: read</summary>
 					public const int recordingsessionsmetadatavaluesprofileid = 1708;
-					public class Write
-					{
-					}
+
 				}
-				public class Idx
+				public static class Idx
 				{
 					/// <summary>IDX: 0 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -883,7 +858,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int recordingsessionsmetadatavaluesprofileid = 7;
 				}
 			}
-			public class Profiles
+			public static class Profiles
 			{
 				/// <summary>PID: 1800</summary>
 				public const int tablePid = 1800;
@@ -891,7 +866,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				public const int indexColumn = 0;
 				/// <summary>PID: 1801</summary>
 				public const int indexColumnPid = 1801;
-				public class Pid
+				public static class Pid
 				{
 					/// <summary>PID: 1801 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -938,11 +913,8 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int profilesdescription_1809 = 1809;
 					/// <summary>PID: 1809 | Type: read</summary>
 					public const int profilesdescription = 1809;
-					public class Write
-					{
-					}
 				}
-				public class Idx
+				public static class Idx
 				{
 					/// <summary>IDX: 0 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -991,7 +963,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int profilesdescription = 8;
 				}
 			}
-			public class Profilefields
+			public static class Profilefields
 			{
 				/// <summary>PID: 1900</summary>
 				public const int tablePid = 1900;
@@ -999,7 +971,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				public const int indexColumn = 0;
 				/// <summary>PID: 1901</summary>
 				public const int indexColumnPid = 1901;
-				public class Pid
+				public static class Pid
 				{
 					/// <summary>PID: 1901 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -1056,11 +1028,8 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int profilefieldsfqncontraints_1911 = 1911;
 					/// <summary>PID: 1911 | Type: read</summary>
 					public const int profilefieldsfqncontraints = 1911;
-					public class Write
-					{
-					}
 				}
-				public class Idx
+				public static class Idx
 				{
 					/// <summary>IDX: 0 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -1119,7 +1088,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int profilefieldsfqncontraints = 10;
 				}
 			}
-			public class Targetsconfig
+			public static class Targetsconfig
 			{
 				/// <summary>PID: 2000</summary>
 				public const int tablePid = 2000;
@@ -1127,7 +1096,7 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 				public const int indexColumn = 0;
 				/// <summary>PID: 2001</summary>
 				public const int indexColumnPid = 2001;
-				public class Pid
+				public static class Pid
 				{
 					/// <summary>PID: 2001 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
@@ -1149,11 +1118,8 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
 					public const int targetsconfigvalue_2004 = 2004;
 					/// <summary>PID: 2004 | Type: read</summary>
 					public const int targetsconfigvalue = 2004;
-					public class Write
-					{
-					}
 				}
-				public class Idx
+				public static class Idx
 				{
 					/// <summary>IDX: 0 | Type: read</summary>
 					[EditorBrowsable(EditorBrowsableState.Never)]
