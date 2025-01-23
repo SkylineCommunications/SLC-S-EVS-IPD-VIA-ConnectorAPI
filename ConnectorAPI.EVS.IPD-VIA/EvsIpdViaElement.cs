@@ -80,7 +80,7 @@
 				if (timeout != null) return (TimeSpan)timeout;
 				try
 				{
-					var timeoutInSeconds = element.GetStandaloneParameter<double?>(EvsIpdViaProtocol.Parameter.interapptimeout_500) ?? throw new NullReferenceException("InterApp Timeout value is null.");
+					var timeoutInSeconds = element.GetStandaloneParameter<double?>(EvsIpdViaProtocol.Parameter.interapptimeout_500) ?? throw new InvalidOperationException("InterApp Timeout value is null.");
 					timeout = TimeSpan.FromSeconds(timeoutInSeconds.GetValue().Value);
 					Log($"Timeout timespan: {timeout}");
 					return (TimeSpan)timeout;
