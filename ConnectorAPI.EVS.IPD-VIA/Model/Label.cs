@@ -1,4 +1,5 @@
 ﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Model
+{
 	/// <summary>
 	/// Represents a label in the EVS IPD-VIA model.
 	/// </summary>
