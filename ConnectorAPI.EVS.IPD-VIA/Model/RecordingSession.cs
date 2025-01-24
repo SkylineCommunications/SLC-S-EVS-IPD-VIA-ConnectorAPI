@@ -74,17 +74,21 @@
 		{
 			if (obj == null) return false;
 
+            if (ReferenceEquals(this, obj)) return true;
+
 			if (!(obj is RecordingSession second)) return false;
 
-			foreach (var propertyInfo in typeof(RecordingSession).GetProperties())
-			{
-				var firstValue = propertyInfo.GetValue(this);
-				var secondValue = propertyInfo.GetValue(second);
+            bool isEqual = true;
 
-				if (!firstValue.Equals(secondValue)) return false;
-			}
+            isEqual &= Id == second.Id;
+            isEqual &= Name == second.Name;
+            isEqual &= Start == second.Start;
+            isEqual &= End == second.End;
+            isEqual &= Recorder?.Id == second.Recorder?.Id;
+            isEqual &= Recorder?.Name == second.Recorder?.Name;
+            isEqual &= Status == second.Status;
 
-			return true;
+			return isEqual;
 		}
 	}
 }

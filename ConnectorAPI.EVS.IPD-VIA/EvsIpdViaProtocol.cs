@@ -58,6 +58,11 @@
 			public static class Idx
 			{
 				/// <summary>
+				/// Index for Target Instance.
+				/// </summary>
+				public static readonly int TargetsInstance = 0;
+
+				/// <summary>
 				/// Index for Target Names.
 				/// </summary>
 				public static readonly int TargetsName = 1;

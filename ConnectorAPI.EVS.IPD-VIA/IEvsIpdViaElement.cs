@@ -17,7 +17,7 @@
 		/// <summary>
 		/// Gets the time-out configured in the element.
 		/// </summary>
-		TimeSpan Timeout { get; }
+		TimeSpan InterAppTimeout { get; }
 
 		/// <summary>
 		/// Adds or updates a recording session in EVS.
@@ -52,9 +52,9 @@
 		RecordingSession GetRecordingSession(string recordingSessionId);
 
 		/// <summary>
-		/// Gets all target names.
+		/// Gets all targets.
 		/// </summary>
 		/// <returns></returns>
-		IEnumerable<string> GetTargetNames();
+		IEnumerable<Target> GetTargets();
 	}
 }

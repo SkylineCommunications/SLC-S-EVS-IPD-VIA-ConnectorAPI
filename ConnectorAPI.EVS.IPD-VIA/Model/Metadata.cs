@@ -10,7 +10,7 @@
         /// <summary>
         /// Gets or sets the profile associated with the metadata.
         /// </summary>
-        public string Profile { get; set; }
+        public string ProfileFullyQualifiedName { get; set; }
 
         /// <summary>
         /// Gets or sets the dictionary containing metadata values. Key represents the metadata key, and value represents the metadata value.

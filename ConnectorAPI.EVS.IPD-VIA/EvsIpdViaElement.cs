@@ -66,7 +66,7 @@
 		/// Maximum amount of time in which every request to the EVS element should be handled.
 		/// Default: 30 seconds.
 		/// </summary>
-		public TimeSpan Timeout
+		public TimeSpan InterAppTimeout
 		{
 			get
 			{
@@ -199,11 +199,17 @@
 		/// Gets the names of the available targets from the Targets table from the element.
 		/// </summary>
 		/// <returns>List of target names.</returns>
-		public IEnumerable<string> GetTargetNames()
+		public IEnumerable<Target> GetTargets()
 		{
 			var targetsTable = element.GetTable(EvsIpdViaProtocol.TargetsTable.TablePid).GetData();
 
-			return targetsTable.Values.Select(x => Convert.ToString(x[EvsIpdViaProtocol.TargetsTable.Idx.TargetsName])).ToList();
+			return targetsTable.Values.Select(row => 
+				new Target
+				{
+					Instance = Convert.ToString(row[EvsIpdViaProtocol.TargetsTable.Idx.TargetsInstance]),
+					Name = Convert.ToString(row[EvsIpdViaProtocol.TargetsTable.Idx.TargetsName]),
+				}
+			).ToList();
 		}
 
 		/// <summary>
@@ -228,8 +234,9 @@
 
 		private Dictionary<string, Metadata> GetMetadataOfRecordingSession(string recordingSessionId)
 		{
-			var metaDataTable = element.GetTable(EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.TablePid);
-			var metaDataEntries = metaDataTable.QueryData(new[]
+			var recordingSessionsMetadataValuesTable = element.GetTable(EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.TablePid);
+			
+			var metadataValueForRecordingSessionRows = recordingSessionsMetadataValuesTable.QueryData(new[]
 			{
 				new ColumnFilter
 				{
@@ -240,34 +247,33 @@
 			});
 
 			var profileFieldsTableData = element.GetTable(EvsIpdViaProtocol.ProfileFieldsTable.TablePid).GetData();
-			Dictionary<string, Metadata> metadataToStore = new Dictionary<string, Metadata>();
-			foreach (var metaDataEntry in metaDataEntries)
+			
+			var result = new Dictionary<string, Metadata>();
+			
+			foreach (var metadataValueRow in metadataValueForRecordingSessionRows)
 			{
-				string profileFqn = Convert.ToString(metaDataEntry[EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.Idx.RecordingSessionsMetadataValuesProfile]);
-				string label = Convert.ToString(metaDataEntry[EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.Idx.RecordingSessionsMetadataValuesKey]);
-				string value = Convert.ToString(metaDataEntry[EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.Idx.RecordingSessionsMetadataValuesValue]);
+				string profileFqn = Convert.ToString(metadataValueRow[EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.Idx.RecordingSessionsMetadataValuesProfile]);
+				string label = Convert.ToString(metadataValueRow[EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.Idx.RecordingSessionsMetadataValuesKey]);
+				string value = Convert.ToString(metadataValueRow[EvsIpdViaProtocol.RecordingSessionsMetadataValuesTable.Idx.RecordingSessionsMetadataValuesValue]);
 
 				string key = GetProfileFieldKey(profileFqn, label, profileFieldsTableData.Values);
 				if (String.IsNullOrWhiteSpace(key)) continue;
 
-				if (metadataToStore.TryGetValue(profileFqn, out Metadata metadata))
+				if (!result.TryGetValue(profileFqn, out var metadata))
 				{
-					metadata.Values[key] = value;
-				}
-				else
-				{
-					metadataToStore.Add(profileFqn, new Metadata
+					metadata = new Metadata
 					{
-						Profile = profileFqn,
-						Values = new Dictionary<string, string>
-						{
-							{ key, value }
-						}
-					});
+						ProfileFullyQualifiedName = profileFqn,
+						Values = new Dictionary<string, string>(),
+					};
+
+					result.Add(profileFqn, metadata);
 				}
+
+				metadata.Values[key] = value;
 			}
 
-			return metadataToStore;
+			return result;
 		}
 
 		private IEnumerable<Target> GetTargetsOfRecordingSession(string recordingSessionId)
@@ -312,7 +318,7 @@
 			{
 				if (requiresResponse)
 				{
-					var response = commands.Send(connection, element.AgentId, element.Id, EvsIpdViaProtocol.InterAppReceive, Timeout, KnownTypes).First();
+					var response = commands.Send(connection, element.AgentId, element.Id, EvsIpdViaProtocol.InterAppReceive, InterAppTimeout, KnownTypes).First();
 					if (!(response is T castResponse))
 					{
 						reason = $"Received response is not of type {typeof(T)}";
