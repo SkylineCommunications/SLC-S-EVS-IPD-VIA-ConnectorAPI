@@ -3,13 +3,16 @@
 	/// <summary>
 	/// Defines constants related to the EVS IPD-VIA protocol.
 	/// </summary>
-	internal static class EvsIpdViaProtocol
+	public static class EvsIpdViaProtocol
 	{
 		/// <summary>
 		/// The name of the EVS IPD-VIA protocol.
 		/// </summary>
 		public static readonly string Name = "EVS IPD-VIA";
 
+		/// <summary>
+		/// The PID of the InterApp timeout param.
+		/// </summary>
 		public static readonly int InterAppTimeout = 500;
 
 		/// <summary>
