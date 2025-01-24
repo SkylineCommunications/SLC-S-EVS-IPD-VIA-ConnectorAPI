@@ -131,7 +131,7 @@
 
 			var message = new DeleteRecordingSession
 			{
-				RecordingSessionsId = recordingSessionId
+				RecordingSessionId = recordingSessionId
 			};
 
 			if (!TrySendMessage(message, false, out string reason, out Message _))

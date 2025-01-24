@@ -10,6 +10,6 @@ namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Messages
         /// <summary>
         /// Gets or sets the ID of the recording session to delete.
         /// </summary>
-        public string RecordingSessionsId { get; set; }
+        public string RecordingSessionId { get; set; }
     }
 }
