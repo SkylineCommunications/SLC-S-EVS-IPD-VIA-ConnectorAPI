@@ -41,7 +41,7 @@
         /// <summary>
         /// Gets or sets the list of targets associated with the recording session.
         /// </summary>
-        public IEnumerable<string> Targets { get; set; } = new List<string>();
+        public IEnumerable<Target> Targets { get; set; } = new List<Target>();
 
         /// <summary>
         /// Gets or sets the metadata associated with the recording session.

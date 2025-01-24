@@ -18,34 +18,11 @@
 	/// </summary>
 	public class EvsIpdViaElement : IEvsIpdViaElement
 	{
-		/// <summary>
-		/// ID of the parameter in the EVS IPD VIA protocol that's used to receive incoming InterApp messages.
-		/// </summary>
-		public const int InterAppReceive_ParameterId = 9000000;
-
 		private readonly IConnection connection;
 		private readonly IDmsElement element;
 		private readonly ILogger logger;
 
 		private TimeSpan? timeout;
-
-		private static readonly List<Type> knownTypes = new List<Type>
-		{
-			typeof(AddOrUpdateRecordingSession),
-			typeof(AddOrUpdateRecordingSessionResult),
-			typeof(DeleteRecordingSession),
-			typeof(RecordingSession),
-			typeof(Metadata),
-			typeof(List<Metadata>),
-			typeof(Metadata[]),
-			typeof(Dictionary<string, string>),
-			typeof(ReturnAddress)
-		};
-
-		/// <summary>
-		/// List of known types. Used during InterApp communication.
-		/// </summary>
-		public static IEnumerable<Type> KnownTypes => knownTypes;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="EvsIpdViaElement"/> class.
@@ -63,6 +40,22 @@
 			this.logger = logger;
 			if (element.State != ElementState.Active) throw new InvalidOperationException($"Element {element.Name} is not active");
 		}
+
+		/// <summary>
+		/// List of known types. Used during InterApp communication.
+		/// </summary>
+		public static IReadOnlyCollection<Type> KnownTypes { get; } = new List<Type>
+		{
+			typeof(AddOrUpdateRecordingSession),
+			typeof(AddOrUpdateRecordingSessionResult),
+			typeof(DeleteRecordingSession),
+			typeof(RecordingSession),
+			typeof(Metadata),
+			typeof(List<Metadata>),
+			typeof(Metadata[]),
+			typeof(Dictionary<string, string>),
+			typeof(ReturnAddress)
+		};
 
 		/// <summary>
 		/// Gets the name of the DataMiner element.
@@ -277,20 +270,31 @@
 			return metadataToStore;
 		}
 
-		private IEnumerable<string> GetTargetsOfRecordingSession(string recordingSessionId)
+		private IEnumerable<Target> GetTargetsOfRecordingSession(string recordingSessionId)
 		{
 			var recordingSessionsTargetsTable = element.GetTable(EvsIpdViaProtocol.RecordingSessionsTargetsTable.TablePid);
 
-			var targets = recordingSessionsTargetsTable.QueryData(new[]
+			var recordingSessionTargetRows = recordingSessionsTargetsTable.QueryData(new[]
 			{
 				new ColumnFilter
 				{
-					Pid = EvsIpdViaProtocol.RecordingSessionsTargetsTable.Pid.RecordingSessionsTargetsInstance,
+					Pid = EvsIpdViaProtocol.RecordingSessionsTargetsTable.Pid.RecordingSessionsTargetsRecordingSessionInstance,
 					ComparisonOperator = ComparisonOperator.Equal,
 					Value = recordingSessionId
 				}
-			}).Select(x => Convert.ToString(x[EvsIpdViaProtocol.RecordingSessionsTargetsTable.Idx.RecordingSessionsTargetsTarget])).ToArray();
+			});
+			
+			var targets = new List<Target>();
 
+			foreach (var row in recordingSessionTargetRows)
+			{
+				targets.Add(new Target
+				{
+					Instance = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTargetsTable.Idx.RecordingSessionsTargetsTargetInstance]),
+					Name = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTargetsTable.Idx.RecordingSessionsTargetsTarget])
+				});
+			}
+			
 			return targets;
 		}
 
@@ -308,7 +312,7 @@
 			{
 				if (requiresResponse)
 				{
-					var response = commands.Send(connection, element.AgentId, element.Id, InterAppReceive_ParameterId, Timeout, knownTypes).First();
+					var response = commands.Send(connection, element.AgentId, element.Id, EvsIpdViaProtocol.InterAppReceive, Timeout, KnownTypes).First();
 					if (!(response is T castResponse))
 					{
 						reason = $"Received response is not of type {typeof(T)}";
@@ -320,7 +324,7 @@
 				}
 				else
 				{
-					commands.Send(connection, element.AgentId, element.Id, InterAppReceive_ParameterId, knownTypes);
+					commands.Send(connection, element.AgentId, element.Id, EvsIpdViaProtocol.InterAppReceive, KnownTypes);
 				}
 			}
 			catch (Exception e)

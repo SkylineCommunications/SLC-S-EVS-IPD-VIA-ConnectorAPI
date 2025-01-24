@@ -16,6 +16,11 @@
 		public static readonly int InterAppTimeout = 500;
 
 		/// <summary>
+		/// ID of the parameter in the EVS IPD VIA protocol that's used to receive incoming InterApp messages.
+		/// </summary>
+		public static readonly int InterAppReceive = 9000000;
+
+		/// <summary>
 		/// Constants related to the Recorders table.
 		/// </summary>
 		public static class RecordersTable
