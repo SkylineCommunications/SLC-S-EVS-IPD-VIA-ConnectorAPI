@@ -26,6 +26,11 @@
 			public static readonly int InterAppTimeout = 500;
 
 			/// <summary>
+			/// The PID of the Recording Session Message parameter.
+			/// </summary>
+			public static readonly int RecordingSessionMessage = 999;
+
+			/// <summary>
 			/// ID of the parameter in the EVS IPD VIA protocol that's used to receive incoming InterApp messages.
 			/// </summary>
 			public static readonly int InterAppReceive = 9000000;
