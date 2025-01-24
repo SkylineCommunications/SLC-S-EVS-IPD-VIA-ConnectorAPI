@@ -125,9 +125,14 @@
 				public static readonly int RecordingSessionsEndIdx = 4;
 
 				/// <summary>
-				/// Index for Recording Sessions Recorder.
+				/// Index for Recording Sessions Recorder Name.
 				/// </summary>
 				public static readonly int RecordingSessionsRecorderIdx = 5;
+
+				/// <summary>
+				/// Index for Recording Sessions Recorder ID.
+				/// </summary>
+				public static readonly int RecordingSessionsRecorderIdIdx = 6;
 			}
 		}
 

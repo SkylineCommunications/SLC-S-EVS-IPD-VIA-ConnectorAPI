@@ -36,7 +36,7 @@
 		/// Gets all labels from the metadata table.
 		/// </summary>
 		/// <returns></returns>
-		IEnumerable<Label> GetMetadataLabels();
+		IEnumerable<ProfileField> GetMetadataLabels();
 
 		/// <summary>
 		/// Gets all recorders from the Recorders table.

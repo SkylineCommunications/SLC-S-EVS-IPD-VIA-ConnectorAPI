@@ -31,7 +31,7 @@
         /// <summary>
         /// Gets or sets the recorder associated with the recording session.
         /// </summary>
-        public string Recorder { get; set; }
+        public Recorder Recorder { get; set; }
 
         /// <summary>
         /// Gets or sets the status of the recording session.
@@ -47,5 +47,44 @@
         /// Gets or sets the metadata associated with the recording session.
         /// </summary>
         public IEnumerable<Metadata> Metadata { get; set; } = new List<Metadata>();
-    }
+
+        /// <summary>
+        /// Gets the Hash code for the recording session.
+        /// </summary>
+        /// <returns></returns>
+		public override int GetHashCode()
+		{
+			int hashCode = Id == null ? 1 : Id.GetHashCode();
+			hashCode ^= Name == null ? 1 : Name.GetHashCode();
+			hashCode ^= Start.GetHashCode();
+			hashCode ^= End.GetHashCode();
+			hashCode ^= Recorder == null ? 1 : Recorder.GetHashCode();
+			hashCode ^= Status.GetHashCode();
+			hashCode ^= Targets == null ? 1 : Targets.GetHashCode();
+			hashCode ^= Metadata == null ? 1 : Metadata.GetHashCode();
+			return hashCode;
+		}
+
+        /// <summary>
+        /// Checks equality between current instance and given instance.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+		public override bool Equals(object obj)
+		{
+			if (obj == null) return false;
+
+			if (!(obj is RecordingSession second)) return false;
+
+			foreach (var propertyInfo in typeof(RecordingSession).GetProperties())
+			{
+				var firstValue = propertyInfo.GetValue(this);
+				var secondValue = propertyInfo.GetValue(second);
+
+				if (!firstValue.Equals(secondValue)) return false;
+			}
+
+			return true;
+		}
+	}
 }

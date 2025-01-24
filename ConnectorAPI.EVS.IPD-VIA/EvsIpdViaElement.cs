@@ -167,13 +167,28 @@
 				Name = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsNameIdx]),
 				Start = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStartIdx])), DateTimeKind.Local),
 				End = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsEndIdx])), DateTimeKind.Local),
-				Recorder = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsRecorderIdx]),
-				Status = (RecordingSessionStatus)(Convert.ToInt32(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStatusIdx])),
+				Recorder = GetRecorder(Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsRecorderIdIdx])),
+				Status = (RecordingSessionStatus)Convert.ToInt32(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStatusIdx]),
 				Targets = GetTargetsOfRecordingSession(recordingSessionId),
-				Metadata = GetMetadataOfRecordingSession(recordingSessionId).Values.ToList()
+				Metadata = GetMetadataOfRecordingSession(recordingSessionId).Values.ToList(),
 			};
 
 			return recordingSession;
+		}
+
+		/// <summary>
+		/// Gets the recorder for the given ID.
+		/// </summary>
+		/// <param name="recorderId"></param>
+		public Recorder GetRecorder(string recorderId)
+		{
+			var recorderRow = element.GetTable(EvsIpdViaProtocol.RecordersTable.TablePid).GetRow(recorderId);
+
+			return new Recorder
+			{
+				Id = recorderId,
+				Name = Convert.ToString(recorderRow[EvsIpdViaProtocol.RecordersTable.Idx.RecordersName])
+			};
 		}
 
 		/// <summary>
@@ -202,18 +217,19 @@
 		/// Retrieves the metadata labels from the Profile Fields table.
 		/// </summary>
 		/// <returns>All labels from the Profile Fields table.</returns>
-		public IEnumerable<Label> GetMetadataLabels()
+		public IEnumerable<ProfileField> GetMetadataLabels()
 		{
 			var profileFieldsTable = element.GetTable(EvsIpdViaProtocol.ProfileFieldsTable.TablePid);
 
-			return profileFieldsTable.GetData().Values.Select(x => new Label
+			return profileFieldsTable.GetData().Values.Select(row => new ProfileField
 			{
-				Key = Convert.ToString(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsKey]),
-				Name = Convert.ToString(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsLabel]),
-				Type = Convert.ToString(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsType]),
-				Required = Convert.ToBoolean(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsRequired]),
-				ProfileFqn = Convert.ToString(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsProfileFqn]),
-				ProfileName = Convert.ToString(x[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsProfileName])
+				Instance = Convert.ToString(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsInstance]),
+				Key = Convert.ToString(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsKey]),
+				ProfileFullyQualifiedName = Convert.ToString(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsProfileFqn]),
+				Label = Convert.ToString(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsLabel]),
+				Type = Convert.ToString(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsType]),
+				Required = Convert.ToBoolean(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsRequired]),
+				ProfileName = Convert.ToString(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsProfileName])
 			}).ToList();
 		}
 
