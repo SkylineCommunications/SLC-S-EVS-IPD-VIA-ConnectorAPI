@@ -160,28 +160,17 @@
 				Name = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsNameIdx]),
 				Start = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStartIdx])), DateTimeKind.Local),
 				End = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsEndIdx])), DateTimeKind.Local),
-				Recorder = GetRecorder(Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsRecorderIdIdx])),
+				Recorder = new Recorder
+				{
+					Id = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsRecorderIdIdx]),
+					Name = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsRecorderIdx])
+				},
 				Status = (RecordingSessionStatus)Convert.ToInt32(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStatusIdx]),
 				Targets = GetTargetsOfRecordingSession(recordingSessionId),
 				Metadata = GetMetadataOfRecordingSession(recordingSessionId).Values.ToList(),
 			};
 
 			return recordingSession;
-		}
-
-		/// <summary>
-		/// Gets the recorder for the given ID.
-		/// </summary>
-		/// <param name="recorderId"></param>
-		public Recorder GetRecorder(string recorderId)
-		{
-			var recorderRow = element.GetTable(EvsIpdViaProtocol.RecordersTable.TablePid).GetRow(recorderId);
-
-			return new Recorder
-			{
-				Id = recorderId,
-				Name = Convert.ToString(recorderRow[EvsIpdViaProtocol.RecordersTable.Idx.RecordersName])
-			};
 		}
 
 		/// <summary>
@@ -216,7 +205,7 @@
 		/// Retrieves the metadata labels from the Profile Fields table.
 		/// </summary>
 		/// <returns>All labels from the Profile Fields table.</returns>
-		public IEnumerable<ProfileField> GetMetadataLabels()
+		public IEnumerable<ProfileField> GetProfileFields()
 		{
 			var profileFieldsTable = element.GetTable(EvsIpdViaProtocol.ProfileFieldsTable.TablePid);
 

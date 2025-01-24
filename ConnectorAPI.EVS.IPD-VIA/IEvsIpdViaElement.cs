@@ -20,6 +20,13 @@
 		TimeSpan InterAppTimeout { get; }
 
 		/// <summary>
+		/// Gets the recording session for the given ID.
+		/// </summary>
+		/// <param name="recordingSessionId"></param>
+		/// <returns></returns>
+		RecordingSession GetRecordingSession(string recordingSessionId);
+
+		/// <summary>
 		/// Adds or updates a recording session in EVS.
 		/// </summary>
 		/// <param name="recordingSession"></param>
@@ -36,20 +43,13 @@
 		/// Gets all labels from the metadata table.
 		/// </summary>
 		/// <returns></returns>
-		IEnumerable<ProfileField> GetMetadataLabels();
+		IEnumerable<ProfileField> GetProfileFields();
 
 		/// <summary>
 		/// Gets all recorders from the Recorders table.
 		/// </summary>
 		/// <returns></returns>
 		IEnumerable<Recorder> GetRecorders();
-
-		/// <summary>
-		/// Gets the recording session for the given ID.
-		/// </summary>
-		/// <param name="recordingSessionId"></param>
-		/// <returns></returns>
-		RecordingSession GetRecordingSession(string recordingSessionId);
 
 		/// <summary>
 		/// Gets all targets.
