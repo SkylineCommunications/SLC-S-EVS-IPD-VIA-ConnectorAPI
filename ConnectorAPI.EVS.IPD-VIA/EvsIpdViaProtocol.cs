@@ -11,14 +11,25 @@
 		public static readonly string Name = "EVS IPD-VIA";
 
 		/// <summary>
-		/// The PID of the InterApp timeout param.
+		/// Defines parameter IDs of the EVS IPD-VIA protocol.
 		/// </summary>
-		public static readonly int InterAppTimeout = 500;
+		public static class Parameter
+		{
+			/// <summary>
+			/// The PID of the Updated Recording Session ID parameter.
+			/// </summary>
+			public static readonly int UpdatedRecordingSessionId = 50;
 
-		/// <summary>
-		/// ID of the parameter in the EVS IPD VIA protocol that's used to receive incoming InterApp messages.
-		/// </summary>
-		public static readonly int InterAppReceive = 9000000;
+			/// <summary>
+			/// The PID of the InterApp timeout param.
+			/// </summary>
+			public static readonly int InterAppTimeout = 500;
+
+			/// <summary>
+			/// ID of the parameter in the EVS IPD VIA protocol that's used to receive incoming InterApp messages.
+			/// </summary>
+			public static readonly int InterAppReceive = 9000000;
+		}
 
 		/// <summary>
 		/// Constants related to the Recorders table.

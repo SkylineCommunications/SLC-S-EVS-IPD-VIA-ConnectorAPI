@@ -73,7 +73,7 @@
 				if (timeout != null) return (TimeSpan)timeout;
 				try
 				{
-					var timeoutInSeconds = element.GetStandaloneParameter<double?>(EvsIpdViaProtocol.InterAppTimeout) ?? throw new InvalidOperationException("InterApp Timeout value is null.");
+					var timeoutInSeconds = element.GetStandaloneParameter<double?>(EvsIpdViaProtocol.Parameter.InterAppTimeout) ?? throw new InvalidOperationException("InterApp Timeout value is null.");
 					timeout = TimeSpan.FromSeconds(timeoutInSeconds.GetValue().Value);
 					Log($"Timeout timespan: {timeout}");
 					return (TimeSpan)timeout;
@@ -307,7 +307,7 @@
 			{
 				if (requiresResponse)
 				{
-					var response = commands.Send(connection, element.AgentId, element.Id, EvsIpdViaProtocol.InterAppReceive, InterAppTimeout, KnownTypes).First();
+					var response = commands.Send(connection, element.AgentId, element.Id, EvsIpdViaProtocol.Parameter.InterAppReceive, InterAppTimeout, KnownTypes).First();
 					if (!(response is T castResponse))
 					{
 						reason = $"Received response is not of type {typeof(T)}";
@@ -319,7 +319,7 @@
 				}
 				else
 				{
-					commands.Send(connection, element.AgentId, element.Id, EvsIpdViaProtocol.InterAppReceive, KnownTypes);
+					commands.Send(connection, element.AgentId, element.Id, EvsIpdViaProtocol.Parameter.InterAppReceive, KnownTypes);
 				}
 			}
 			catch (Exception e)
