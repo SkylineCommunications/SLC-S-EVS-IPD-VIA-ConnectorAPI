@@ -2,7 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Model;
+	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.Element;
 
 	/// <summary>
 	/// Interface defining interactions with EVS IPD VIA element.

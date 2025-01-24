@@ -1,14 +1,14 @@
-﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Model
+﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.Element
 {
 	/// <summary>
 	/// Represents a profile field in the EVS IPD-VIA model.
 	/// </summary>
 	public class ProfileField
-    {
-        /// <summary>
-        /// Gets or sets the instance of the profile field.
-        /// </summary>
-        public string Instance { get; set; }
+	{
+		/// <summary>
+		/// Gets or sets the instance of the profile field.
+		/// </summary>
+		public string Instance { get; set; }
 
 		/// <summary>
 		/// Gets or sets the key of the profile field.
@@ -39,5 +39,5 @@
 		/// Gets or sets a value indicating whether the profile field is required.
 		/// </summary>
 		public bool Required { get; set; }
-    }
+	}
 }

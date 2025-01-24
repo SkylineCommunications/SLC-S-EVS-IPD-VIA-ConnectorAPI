@@ -4,9 +4,9 @@
 	using System.Collections.Generic;
 	using System.Diagnostics;
 	using System.Linq;
+	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.Element;
 	using Newtonsoft.Json;
 	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Messages;
-	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Model;
 	using Skyline.DataMiner.Core.DataMinerSystem.Common;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.CallBulk;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.CallSingle;

@@ -1,11 +1,11 @@
-﻿using Skyline.DataMiner.Core.InterAppCalls.Common.CallSingle;
-
-namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Messages
+﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Messages
 {
-    /// <summary>
-    /// Represents a result message.
-    /// </summary>
-    public class Result : Message
+	using Skyline.DataMiner.Core.InterAppCalls.Common.CallSingle;
+
+	/// <summary>
+	/// Represents a result message.
+	/// </summary>
+	public class Result : Message
     {
         /// <summary>
         /// Gets or sets a value indicating whether the operation was successful.
