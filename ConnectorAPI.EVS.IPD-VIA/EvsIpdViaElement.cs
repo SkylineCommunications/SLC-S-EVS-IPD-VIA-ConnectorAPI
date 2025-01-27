@@ -4,14 +4,16 @@
 	using System.Collections.Generic;
 	using System.Diagnostics;
 	using System.Linq;
-	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.Element;
 	using Newtonsoft.Json;
 	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Messages;
+	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.Element;
+	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.EvsIpdViaPlatformCommunication;
 	using Skyline.DataMiner.Core.DataMinerSystem.Common;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.CallBulk;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.CallSingle;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.Shared;
 	using Skyline.DataMiner.Net;
+	using Metadata = Models.Element.Metadata;
 
 	/// <summary>
 	/// Represents an EVS IPD VIA element in DataMiner.
@@ -219,6 +221,25 @@
 				Required = Convert.ToBoolean(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsRequired]),
 				ProfileName = Convert.ToString(row[EvsIpdViaProtocol.ProfileFieldsTable.Idx.ProfileFieldsProfileName])
 			}).ToList();
+		}
+
+		/// <summary>
+		/// Sends a message over Rabbit MQ to the element.
+		/// </summary>
+		/// <param name="recordingMessage"></param>
+		/// <exception cref="ArgumentNullException"></exception>
+		public void SendRabbitMqMessage(RecordingMessage recordingMessage)
+		{
+			if (recordingMessage is null)
+			{
+				throw new ArgumentNullException(nameof(recordingMessage));
+			}
+
+			var serializedRecordingMessage = JsonConvert.SerializeObject(recordingMessage);
+
+			element.GetStandaloneParameter<string>(EvsIpdViaProtocol.Parameter.RecordingSessionMessage).SetValue(serializedRecordingMessage);
+
+			Log($"Sent Rabbit MQ message {serializedRecordingMessage}");
 		}
 
 		private Dictionary<string, Metadata> GetMetadataOfRecordingSession(string recordingSessionId)

@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.Element;
+	using Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.EvsIpdViaPlatformCommunication;
 
 	/// <summary>
 	/// Interface defining interactions with EVS IPD VIA element.
@@ -56,5 +57,11 @@
 		/// </summary>
 		/// <returns></returns>
 		IEnumerable<Target> GetTargets();
+
+		/// <summary>
+		/// Sends a Rabbit MQ message to the element.
+		/// </summary>
+		/// <param name="recordingMessage"></param>
+		void SendRabbitMqMessage(RecordingMessage recordingMessage);
 	}
 }
