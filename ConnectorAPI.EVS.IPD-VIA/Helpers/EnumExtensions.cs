@@ -1,4 +1,4 @@
-﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA
+﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Helpers
 {
 	using System;
 	using System.ComponentModel;
