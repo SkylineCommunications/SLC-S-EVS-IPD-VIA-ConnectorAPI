@@ -162,6 +162,8 @@
 				Name = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsNameIdx]),
 				Start = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsStartIdx])), DateTimeKind.Local),
 				End = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsEndIdx])), DateTimeKind.Local),
+				StartFrame = 0,
+				EndFrame = 0,
 				Recorder = new Recorder
 				{
 					Id = Convert.ToString(row[EvsIpdViaProtocol.RecordingSessionsTable.Idx.RecordingSessionsRecorderIdIdx]),

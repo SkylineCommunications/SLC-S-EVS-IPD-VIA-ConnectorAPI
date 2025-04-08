@@ -29,6 +29,16 @@
 		public DateTime End { get; set; }
 
 		/// <summary>
+		/// Gets or sets the start frame of the recording session.
+		/// </summary>
+		public int StartFrame { get; set; }
+
+		/// <summary>
+		/// Gets or sets the end frame of the recording session.
+		/// </summary>
+		public int EndFrame { get; set; }
+
+		/// <summary>
 		/// Gets or sets the status of the recording session.
 		/// </summary>
 		public RecordingSessionStatus Status { get; set; }
@@ -58,6 +68,8 @@
 			hashCode ^= Name == null ? 1 : Name.GetHashCode();
 			hashCode ^= Start.GetHashCode();
 			hashCode ^= End.GetHashCode();
+			hashCode ^= StartFrame.GetHashCode();
+			hashCode ^= EndFrame.GetHashCode();
 			hashCode ^= Recorder == null ? 1 : Recorder.GetHashCode();
 			hashCode ^= Status.GetHashCode();
 			hashCode ^= Targets == null ? 1 : Targets.GetHashCode();
@@ -84,6 +96,8 @@
 			isEqual &= Name == second.Name;
 			isEqual &= Start == second.Start;
 			isEqual &= End == second.End;
+			isEqual &= StartFrame == second.StartFrame;
+			isEqual &= EndFrame == second.EndFrame;
 			isEqual &= Recorder?.Id == second.Recorder?.Id;
 			isEqual &= Recorder?.Name == second.Recorder?.Name;
 			isEqual &= Status == second.Status;
