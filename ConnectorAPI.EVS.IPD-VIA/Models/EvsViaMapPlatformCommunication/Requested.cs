@@ -44,7 +44,8 @@
             }
 
             DateTime = dateTime.Add(timeSpan);
-			Frame = timeSpan.Milliseconds;
+			var millisecondsAsFrame = timeSpan.Milliseconds / 10;
+			Frame = millisecondsAsFrame;
         }
 
 		/// <summary>
@@ -61,10 +62,11 @@
         {
             if (dateTime.Kind == DateTimeKind.Unspecified) throw new ArgumentException("Unspecified datetime kind", nameof(dateTime));
 
-			DateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, frame, dateTime.Kind);
+			var frameAsMilliseconds = frame * 10;
+			DateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, frameAsMilliseconds, dateTime.Kind);
             Date = DateTime.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             Time = DateTime.ToString("HH:mm:ss:ff", CultureInfo.InvariantCulture);
-			Frame = frame;
+			Frame = frameAsMilliseconds;
 		}
 
 		/// <summary>
