@@ -66,7 +66,7 @@
 			DateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, frameAsMilliseconds, dateTime.Kind);
             Date = DateTime.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             Time = DateTime.ToString("HH:mm:ss:ff", CultureInfo.InvariantCulture);
-			Frame = frameAsMilliseconds;
+			Frame = frame;
 		}
 
 		/// <summary>
