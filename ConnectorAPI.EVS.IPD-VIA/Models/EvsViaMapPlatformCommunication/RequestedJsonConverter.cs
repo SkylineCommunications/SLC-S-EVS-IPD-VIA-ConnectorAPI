@@ -37,7 +37,7 @@
 
 				string sDateTime = Convert.ToString(reader.Value);
 				DateTime.TryParse(sDateTime, out DateTime dateTime);
-				return new Requested(DateTime.SpecifyKind(dateTime, DateTimeKind.Utc));
+				return new Requested(DateTime.SpecifyKind(dateTime, DateTimeKind.Local));
 			}
 		}
 
