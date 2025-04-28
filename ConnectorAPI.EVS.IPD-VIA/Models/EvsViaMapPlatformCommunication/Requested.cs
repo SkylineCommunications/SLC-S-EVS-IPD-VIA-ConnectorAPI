@@ -41,7 +41,7 @@
 		public Requested(DateTime dateTime)
         {
             // This constructor is used to create HTTP requests, where datetimes should be Local
-            // OR to deserialize RabbitMQ messages, where datetimes should be UTC
+            // OR to deserialize RabbitMQ messages, where datetimes should be Local
 
             if (dateTime.Kind == DateTimeKind.Unspecified) throw new ArgumentException("Unspecified datetime kind", nameof(dateTime));
 
