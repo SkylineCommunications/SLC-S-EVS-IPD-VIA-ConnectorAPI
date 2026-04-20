@@ -1,4 +1,4 @@
-﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.EvsIpdViaPlatformCommunication
+namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.EvsIpdViaPlatformCommunication
 {
     using Newtonsoft.Json;
     using System;
@@ -49,12 +49,6 @@
 		/// </summary>
 		[JsonProperty("modificationDate", NullValueHandling = NullValueHandling.Ignore)]
         public DateTimeOffset? ModificationDate { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[JsonProperty("origins", NullValueHandling = NullValueHandling.Ignore)]
-        public Origins Origins { get; set; }
 
 		/// <summary>
 		/// 

@@ -1,4 +1,4 @@
-﻿namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.EvsIpdViaPlatformCommunication
+namespace Skyline.DataMiner.ConnectorAPI.EVS.IPD_VIA.Models.EvsIpdViaPlatformCommunication
 {
     using Newtonsoft.Json;
 
@@ -27,7 +27,7 @@
 		/// 
 		/// </summary>
 		[JsonProperty("targetParameters", NullValueHandling = NullValueHandling.Ignore)]
-        public TargetParameters TargetParameters { get; set; } = new TargetParameters();
+        public object TargetParameters { get; set; }
 
 		/// <summary>
 		/// 

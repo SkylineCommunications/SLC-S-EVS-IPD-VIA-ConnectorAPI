@@ -11,11 +11,6 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		public static readonly string RecordingSessionsPath = "/opengate/1/ingest/recording-sessions/";
-
-		/// <summary>
-		/// 
-		/// </summary>
 		[JsonProperty("destinationMediaAssetRef", NullValueHandling = NullValueHandling.Ignore)]
         public string DestinationMediaAssetRef { get; set; }
 
